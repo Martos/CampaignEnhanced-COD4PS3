@@ -8164,19 +8164,6 @@ mix_up( sound )
 	}
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: mix_down( <sound> )"
-"Summary: Used to blend sounds on a script model vehicle. See maps\sniperescape_code::seaknight_sound()"
-"Module: Utility"
-"CallOn: A sound blend entity"
-"OptionalArg: <Sound>: The sound alias to blend, blends with the _off version of the alias. "
-"Example: maps\sniperescape_code::seaknight_sound();"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 mix_down( sound )
 {
 	timer = 3 * 20;
@@ -8187,20 +8174,6 @@ mix_down( sound )
 	}
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: manual_linkto( <entity> , <offset> )"
-"Summary: Sets an entity to the origin of another entity every server frame, for entity types that don't support linkto"
-"Module: Utility"
-"CallOn: An entity that doesn't support linkto, like soundblend entities."
-"MandatoryArg: <entity>: The entity to link to "
-"OptionalArg: <offset>: The offset to use "
-"Example: flyblend thread manual_linkto( self, (0,0,0) );"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 manual_linkto( entity, offset )
 {
 	entity endon( "death" );
@@ -8402,19 +8375,6 @@ add_jav_glow( optional_glow_delete_flag )
 	jav_glow delete();
 }
 
-
-/*
-=============
-///ScriptDocBegin
-"Name: delete_on_not_defined()"
-"Summary: Weapons don't seem to notify death when they're picked up."
-"Module: Utility"
-"CallOn: An entity"
-"Example: javelin delete_on_not_defined()"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 delete_on_not_defined()
 {
 	for ( ;; )
@@ -8495,20 +8455,6 @@ add_earthquake( name, mag, duration, radius )
 	level.earthquake[ name ][ "radius" ] = radius;
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: arcadeMode_kill( <origin> , <damage_type> , <amount> )"
-"Summary: Rewards points for a kill in arcade mode."
-"Module: ArcadeMode"
-"MandatoryArg: <origin>: Location of kill"
-"MandatoryArg: <damage_type>: explosive, pistol, rifle, or melee"
-"MandatoryArg: <amount>: Amount of points rewarded"
-"Example: arcadeMode_kill( self.origin, "explosive", 500 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 arcadeMode_kill( origin, damage_type, amount )
 {
 	if ( getdvar( "arcademode" ) != "1" )
@@ -8516,20 +8462,6 @@ arcadeMode_kill( origin, damage_type, amount )
 	thread maps\_arcademode::arcadeMode_add_points( origin, true, damage_type, amount );
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: arcadeMode_damage( <origin> , <damage_type> , <amount> )"
-"Summary: Rewards points for a kill in arcade mode."
-"Module: ArcadeMode"
-"MandatoryArg: <origin>: Location of kill"
-"MandatoryArg: <damage_type>: explosive, pistol, rifle, or melee"
-"MandatoryArg: <amount>: Amount of points rewarded"
-"Example: arcadeMode_damage( self.origin, "explosive", 500 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 arcadeMode_damage( origin, damage_type, amount )
 {
 	if ( getdvar( "arcademode" ) != "1" )
@@ -8647,4 +8579,48 @@ createTestHud(text) {
 	textelem.vertAlign = "fullscreen";
 	textelem setText(text);
 	textelem.alpha = 1;
+}
+add_fake_xp(value)
+{	
+	hud_rankscroreupdate = newHudElem();
+	hud_rankscroreupdate.alignX = "center"; 
+	hud_rankscroreupdate.alignY = "middle"; 
+	hud_rankscroreupdate.horzAlign = "center";
+	hud_rankscroreupdate.vertAlign = "middle";
+	hud_rankscroreupdate.archived = false;
+	hud_rankscroreupdate.x = 0;
+	hud_rankscroreupdate.y = -60;
+	hud_rankscroreupdate.fontScale = 2.0;
+	
+	hud_rankscroreupdate.baseFontScale = 2;
+	hud_rankscroreupdate.maxFontScale = hud_rankscroreupdate.fontScale * 2;
+	hud_rankscroreupdate.inFrames = 3;
+	hud_rankscroreupdate.outFrames = 5;
+	
+	hud_rankscroreupdate.label = "+";
+	hud_rankscroreupdate.color = (1,1,0.5);
+
+	hud_rankscroreupdate setValue(value);
+
+	hud_rankscroreupdate.alpha = 0.85;
+	
+	scaleRange = hud_rankscroreupdate.maxFontScale - hud_rankscroreupdate.baseFontScale;
+	
+	while ( hud_rankscroreupdate.fontScale < hud_rankscroreupdate.maxFontScale )
+	{
+		hud_rankscroreupdate.fontScale = min( hud_rankscroreupdate.maxFontScale, hud_rankscroreupdate.fontScale + (scaleRange / hud_rankscroreupdate.inFrames) );
+		wait 0.05;
+	}
+		
+	while ( hud_rankscroreupdate.fontScale > hud_rankscroreupdate.baseFontScale )
+	{
+		hud_rankscroreupdate.fontScale = max( hud_rankscroreupdate.baseFontScale, hud_rankscroreupdate.fontScale - (scaleRange / hud_rankscroreupdate.outFrames) );
+		wait 0.05;
+	}
+	
+	hud_rankscroreupdate fadeOverTime( 0.85 );
+	hud_rankscroreupdate.alpha = 0;
+	wait 0.85;
+	
+	hud_rankscroreupdate destroy();
 }

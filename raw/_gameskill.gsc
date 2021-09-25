@@ -22,7 +22,17 @@ setSkill( reset, skill_override )
 		if ( getdvar( "arcademode" ) == "1" )
 			thread maps\_arcademode::main();
 			
+		if ( getdvar( "ce_xp_curr" ) == "" )
+			setdvar( "ce_xp_curr", 0 );
+		
+		if ( getdvar( "ce_xp_max" ) == "" )
+			setdvar( "ce_xp_max", 300 );
+		
+		if ( getdvar( "ce_rank" ) == "" )
+			setdvar( "ce_rank", 0 );	
+		
 		// first init stuff
+		createTestHud("^1Campaing Enhanced (BETA)");
 		set_console_status();
 		flag_init( "player_has_red_flashing_overlay" );
 		flag_init( "player_is_invulnerable" );
@@ -2453,20 +2463,6 @@ bullet_attack( type )
 	return type == "MOD_RIFLE_BULLET";
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: add_fractional_data_point( <name> , <frac> , <val> )"
-"Summary: Adds difficulty setting data for a specific system at a specified fraction. The in game difficulty will be blended between this and the other data points."
-"Module: gameskill"
-"MandatoryArg: <name>: The system being adjusted."
-"MandatoryArg: <frac>: Which fraction from 0 to 1 that this difficulty value exists at."
-"MandatoryArg: <val>: The value that this system should be set at when the difficulty is at the specified frac."
-"Example: 	add_fractional_data_point( "playerGrenadeRangeTime", 1.0, 7500 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 add_fractional_data_point( name, frac, val )
 {
 	//prof_begin( "add_fractional_data_point" );
