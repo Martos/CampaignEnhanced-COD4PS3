@@ -2381,16 +2381,6 @@ empty_kill_func( type, loc, point )
 
 auto_adjust_enemy_died( amount, attacker, type, point )
 {
-	//prof_begin( "auto_adjust_enemy_died" );
-	
-	/*
-	Not worth effecting the speed of the game for one spot in one map in one mode
-	// in case the team got changed.
-	if ( self.team != "axis" )
-		return;
-	if ( isdefined( self.civilian ) )
-		return;
-	*/
 
 	aa_add_event( "aa_enemy_deaths", 1 );
 	if ( !isdefined( attacker ) )
@@ -2408,6 +2398,7 @@ auto_adjust_enemy_died( amount, attacker, type, point )
 	[[ level.global_kill_func ]]( type, self.damagelocation, point );
 	
 	aa_add_event( "aa_player_kills", 1 );
+	add_fake_xp(5);
 	
 	//prof_end( "auto_adjust_enemy_died" );
 }
