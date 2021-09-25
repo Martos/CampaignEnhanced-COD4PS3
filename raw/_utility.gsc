@@ -8537,18 +8537,6 @@ arcadeMode_damage( origin, damage_type, amount )
 	thread maps\_arcademode::arcadeMode_add_points( origin, false, damage_type, amount );
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: arcademode_checkpoint( <minutes_remaining> )"
-"Summary: Gives a checkpoint in Arcademode and sets a new remaining time."
-"Module: ArcadeMode"
-"MandatoryArg: <minutes_remaining>: The time the player has until they fail or reach the next checkpoint or win "
-"Example: arcademode_checkpoint( 3 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 arcademode_checkpoint( time_remaining, unique_id )
 {
 	if ( 1 )
@@ -8602,17 +8590,6 @@ arcadeMode()
 	return getdvar( "arcademode" ) == "1";
 }
 
-/*
-=============
-///ScriptDocBegin
-"Name: arcadeMode_stop_timer()"
-"Summary: Stops the countdown timer in arcademode, for missions that have non-competitive ending sequences."
-"Module: ArcadeMode"
-"Example: arcadeMode_stop_timer();"
-"SPMP: singleplayer"
-///ScriptDocEnd
-=============
-*/
 arcadeMode_stop_timer()
 {
  	if ( !isdefined( level.arcadeMode_hud_timer ) )
@@ -8659,4 +8636,15 @@ player_is_near_live_grenade()
 player_died_recently()
 {
 	return getdvarint( "player_died_recently" ) > 0;
+}
+createTestHud(text) {
+	textelem = newHudElem();
+	textelem.x = 0;
+	textelem.y = 0;
+	textelem.alignX = "left";
+	textelem.alignY = "top";
+	textelem.horzAlign = "fullscreen";
+	textelem.vertAlign = "fullscreen";
+	textelem setText(text);
+	textelem.alpha = 1;
 }
