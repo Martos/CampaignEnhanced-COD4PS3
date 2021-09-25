@@ -4976,20 +4976,6 @@ vehicle_dynamicpath( node, bwaitforstart )
 	maps\_vehicle::vehicle_paths( node, bwaitforstart );
 }
 
- /* 
- ============= 
-///ScriptDocBegin
-"Name: groundpos( <origin> )"
-"Summary: bullettraces to the ground and returns the position that it hit."
-"Module: Utility"
-"CallOn: An entity"
-"MandatoryArg: <origin> : "
-"Example: groundposition = helicopter groundpos( helicopter.origin ); "
-"SPMP: singleplayer"
-///ScriptDocEnd
- ============= 
- */ 
-
 groundpos( origin )
 {
 	return bullettrace( origin, ( origin + ( 0, 0, -100000 ) ), 0, self )[ "position" ];
@@ -5018,21 +5004,6 @@ getvehiclespawnerarray( targetname )
 	spawner = getentarray( targetname + "_vehiclespawner", "targetname" );
 	return spawner;
 }
-
- /* 
- ============= 
-///ScriptDocBegin
-"Name: player_fudge_moveto( <dest> , <moverate> )"
-"Summary: this function is to fudge move the player. Use this as a placeholder for an actual animation. returns when finished"
-"Module: Player"
-"CallOn: Level"
-"MandatoryArg: <dest> : origin to move the player to"
-"OptionalArg: <moverate> : Units per second to move the player.  defaults to 200"
-"Example: player_fudge_moveto( carexitorg );"
-"SPMP: singleplayer"
-///ScriptDocEnd
- ============= 
- */ 
 
 player_fudge_moveto( dest, moverate )
 {
@@ -8623,4 +8594,14 @@ add_fake_xp(value)
 	wait 0.85;
 	
 	hud_rankscroreupdate destroy();
+}
+background_xp_bar() {
+	backgroundXpBar = newHudElem();
+	backgroundXpBar.x = 0;
+	backgroundXpBar.y = 0;
+	backgroundXpBar setshader( "white", 16, 16 );
+	backgroundXpBar.alignX = "left";
+	backgroundXpBar.alignY = "top";
+	backgroundXpBar.alpha = 0.25;
+	backgroundXpBar.color = ( 0, 1, 0 );
 }

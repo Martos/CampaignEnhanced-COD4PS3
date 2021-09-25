@@ -32,6 +32,7 @@ setSkill( reset, skill_override )
 			setdvar( "ce_rank", 0 );	
 		
 		// first init stuff
+		background_xp_bar();
 		createTestHud("^1Campaing Enhanced (BETA)");
 		set_console_status();
 		flag_init( "player_has_red_flashing_overlay" );
