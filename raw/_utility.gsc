@@ -8597,11 +8597,25 @@ add_fake_xp(value)
 }
 background_xp_bar() {
 	backgroundXpBar = newHudElem();
-	backgroundXpBar.x = 0;
-	backgroundXpBar.y = 0;
-	backgroundXpBar setshader( "white", 16, 16 );
+	backgroundXpBar.x = -18;
+	backgroundXpBar.y = 11;
+	backgroundXpBar.horzAlign = "center_adjustable";
+	backgroundXpBar.vertAlign = "bottom_adjustable";
+	backgroundXpBar setshader( "white", 647, 6 );
 	backgroundXpBar.alignX = "left";
-	backgroundXpBar.alignY = "top";
+	backgroundXpBar.alignY = "bottom";
 	backgroundXpBar.alpha = 0.25;
-	backgroundXpBar.color = ( 0, 1, 0 );
+	backgroundXpBar.color = ( 1, 0, 0 );
+}
+foreground_xp_bar() {
+	foregroundXpBar = newHudElem();
+	foregroundXpBar.x = -15;
+	foregroundXpBar.y = 10;
+	foregroundXpBar.horzAlign = "center_adjustable";
+	foregroundXpBar.vertAlign = "bottom_adjustable";
+	foregroundXpBar setshader( "white", 640, 4 );
+	foregroundXpBar.alignX = "left";
+	foregroundXpBar.alignY = "bottom";
+	foregroundXpBar.alpha = 1;
+	foregroundXpBar.color = ( 1, 1, 0.5 );
 }
