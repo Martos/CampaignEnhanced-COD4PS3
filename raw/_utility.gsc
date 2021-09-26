@@ -8598,7 +8598,7 @@ add_fake_xp(value)
 background_xp_bar() {
 	backgroundXpBar = newHudElem();
 	backgroundXpBar.x = -18;
-	backgroundXpBar.y = 461;
+	backgroundXpBar.y = 451;
 	backgroundXpBar.horzAlign = "center_adjustable";
 	backgroundXpBar.vertAlign = "bottom_adjustable";
 	backgroundXpBar setshader( "white", 647, 6 );
@@ -8610,7 +8610,7 @@ background_xp_bar() {
 foreground_xp_bar() {
 	foregroundXpBar = newHudElem();
 	foregroundXpBar.x = -15;
-	foregroundXpBar.y = 460;
+	foregroundXpBar.y = 450;
 	foregroundXpBar.horzAlign = "center_adjustable";
 	foregroundXpBar.vertAlign = "bottom_adjustable";
 	foregroundXpBar setshader( "white", 640, 4 );
